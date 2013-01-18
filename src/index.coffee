@@ -1,5 +1,7 @@
 Java = require('java')
 fs = require('fs')
+os = require('os');
+path = require('path');
 Commands = require('./commands')
 
 module.exports = class Selenium
@@ -20,11 +22,21 @@ module.exports = class Selenium
   SeleniumWrapper = Java.import('SeleniumWrapper')
 
   constructor: (options = {}) ->
+    @options = options
     @seleniumWrapper = new SeleniumWrapper(options.url || '')
     @seleniumWrapper.setProxySync(options.proxy) if options.proxy
 
+  setChromeDriverPath: (path) ->
+    @seleniumWrapper.setChromeDriverPath(path)
+
   openBrowser: (cb) ->
-    @seleniumWrapper.openBrowser (err, selenium) =>
+    console.log @options
+    browser = (@options.browser||'firefox')
+    console.log os.platform()
+    if browser == 'chrome'
+        console.log (path.join(path.dirname(module.filename),"../ext/chrome/",os.platform()+"_"+os.arch(),"chromedriver"))
+        @setChromeDriverPath(path.join(path.dirname(module.filename),"../ext/chrome/",os.platform()+"_"+os.arch(),"chromedriver"))
+    @seleniumWrapper.openBrowser browser, ( err, selenium) =>
       cb(err, @selenium = selenium)
 
   log: (msg) ->

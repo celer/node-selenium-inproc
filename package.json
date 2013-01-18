@@ -2,7 +2,11 @@
   "name": "selenium-inproc",
   "keywords": ["selenium", "selenese", "browser-automation"],
   "version": "0.1.0",
-  "selenium-url": "http://selenium.googlecode.com/files/selenium-server-standalone-2.25.0.jar",
+  "selenium-url": "http://selenium.googlecode.com/files/selenium-server-standalone-2.28.0.jar",
+	"chrome-driver-mac":"http://chromedriver.googlecode.com/files/chromedriver_mac_26.0.1383.0.zip",
+	"chrome-driver-linux32":"http://chromedriver.googlecode.com/files/chromedriver_linux32_26.0.1383.0.zip",
+	"chrome-driver-linux64":"http://chromedriver.googlecode.com/files/chromedriver_linux64_26.0.1383.0.zip", 
+	"safari-driver":"http://selenium.googlecode.com/files/SafariDriver.safariextension-2.21.0.zip",
   "description": "In-process Selenium.  Wraps the Selenium JAR to provide JavaScript bindings for running Selenium based tests",
   "main": "index.js",
   "dependencies": {

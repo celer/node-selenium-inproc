@@ -4,7 +4,7 @@ var assert = require('assert');
 var url = "http://seleniumhq.org"
 
 
-var browsers = [ "opera","firefox","chrome" ];
+var browsers = [ "firefox","chrome","opera" ];
 
 var testBrowser = function(){
 	var browser = browsers.shift();
@@ -17,16 +17,20 @@ var testBrowser = function(){
 		});
 
 		s.openBrowser(function(err,res){
-			setTimeout(function(){
-				res.open("/",function(){
-					res.getTitle(function(err,title){
-						console.log("Got title ",title,"from browser",browser);
-						assert.notEqual(title.indexOf("Selenium"),-1)
-						res.close();		
-						testBrowser();
+			try {
+				setTimeout(function(){
+					res.open("/",function(){
+						res.getTitle(function(err,title){
+							console.log("Got title ",title,"from browser",browser);
+							assert.notEqual(title.indexOf("Selenium"),-1)
+							res.close();		
+							testBrowser();
+						});
 					});
-				});
-			},1000);
+				},1000);
+			} catch(e){
+				testBrowser();
+			}
 		});
 	}
 

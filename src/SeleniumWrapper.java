@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriverBackedSelenium;
 import org.openqa.selenium.chrome.ChromeDriver;
 import com.opera.core.systems.OperaDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.android.AndroidDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.Command;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -39,6 +40,9 @@ class SeleniumWrapper {
   public Selenium openBrowser(String browser) {
 		if(browser.equalsIgnoreCase("firefox")){
     	driver = new FirefoxDriver(desiredCapabilities);
+		} else if(browser.equalsIgnoreCase("android")){
+    	driver = new AndroidDriver();
+			driver.get(this.baseUrl);
 		} else if(browser.equalsIgnoreCase("chrome")){
     	driver = new ChromeDriver(desiredCapabilities);
 		} else if(browser.equalsIgnoreCase("opera")){
